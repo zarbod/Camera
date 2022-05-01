@@ -54,7 +54,7 @@ def main():
             print("bruh")
             if True in results:
                 cv.rectangle(frame, (h, x), (y, w), green, 2)
-                #time.sleep(10)
+                time.sleep(10)
                 break
             elif i >= len(face_locations):
                 cv.rectangle(frame, (h, x), (y, w), red, 2)

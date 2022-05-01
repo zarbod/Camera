@@ -8,14 +8,19 @@ from kivy.uix.gridlayout import GridLayout
 from kivy.uix.button import Button
 from kivy.uix.widget import Widget
 from kivy.uix.floatlayout import FloatLayout
+from kivy.uix.popup import Popup
+from kivy.lang import Builder
 
-class FileChooseWidget(GridLayout):
+Builder.load_file("filechoosewidget.kv")
 
-    def selected(GridLayout, filename):
-        try:
-            self.ids.image.source = filename[0]
-        except:
-            pass
+class FileChooseWidget(Widget):
+
+    #def selected(GridLayout, filename):
+     #   try:
+      #      self.ids.image.source = filename[0]
+       # except:
+        
+    pass
 
 class FileChooseButton(Widget):
 
@@ -25,12 +30,10 @@ class FileChooseButton(Widget):
         file_choose_btn.bind(on_press=self._on_button_press)
         self.add_widget(file_choose_btn)
 
-    def _on_button_press(x, y):
-        return FileChooseWidget()
-    
-
+   
 class Gui(App):
-
+    
+    '''
     def build(self):
         layout = FloatLayout()
         
@@ -49,10 +52,28 @@ class Gui(App):
         
         #return Label(text = "Drag and Drop File here")
         #return file_choose_btn
-    
+       
+     '''
+    def build(self):
+        
+        layout = FloatLayout()
+
+        file_choose_btn = Button(
+                text='Choose File Manually',
+                pos=(20, 20),
+                on_press=self._on_button_press
+                )
+
+        return FileChooseWidget()
+        #return layout
+
     def _on_file_drop(self, window, file_path, x, y):
         print(file_path)
         return fc.load_faces(str(file_path)[2:len(str(file_path))-1])
+    
+    def _on_button_press(x, y):
+        return FileChooseWidget()
+    
 
 
 def main():
